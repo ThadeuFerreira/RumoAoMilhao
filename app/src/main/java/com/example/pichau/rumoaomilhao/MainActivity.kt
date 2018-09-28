@@ -3,15 +3,25 @@ package com.example.pichau.rumoaomilhao
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    val myList = arrayListOf("Thadeu", "Jussara", "Maria")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Example of a call to a native method
-        sample_text.text = stringFromJNI()
+        homeTxt.text = stringFromJNI()
+
+
+        homeBtn.setOnClickListener{
+            val choseNumber = Random()
+            val randomText = myList[choseNumber.nextInt(myList.count())]
+            println("You Clickec in Me $randomText!")
+        }
     }
 
     /**
