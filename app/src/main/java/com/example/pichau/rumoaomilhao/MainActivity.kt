@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
-            myList.add("Test")
+            homeTxt.text = randomText
             println("You Clickec in Me $randomText!")
         }
     }

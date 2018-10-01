@@ -4,27 +4,18 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 
-import kotlinx.android.synthetic.main.activity_main2.*
-import kotlinx.android.synthetic.main.fragment_main2.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_user_profile.*
 
-class Main2Activity : AppCompatActivity() {
-
-    val myList = arrayListOf("Thadeu", "Jussara", "Maria")
+class UserProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_user_profile)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
-        }
-        testBtn.setOnClickListener{
-            val choseNumber = Random()
-            val randomText = myList[choseNumber.nextInt(myList.count())]
-            println("You Clickec in Me $randomText!")
         }
     }
 
