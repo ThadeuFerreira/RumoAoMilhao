@@ -7,7 +7,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val myList = arrayListOf("Thadeu", "Jussara", "Maria")
+    private val myList = arrayListOf("Thadeu", "Jussara", "Maria")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +16,10 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         homeTxt.text = stringFromJNI()
 
-
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
+            myList.add("Test")
             println("You Clickec in Me $randomText!")
         }
     }
