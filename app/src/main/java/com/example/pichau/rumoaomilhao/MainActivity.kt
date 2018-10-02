@@ -2,12 +2,13 @@ package com.example.pichau.rumoaomilhao
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val myList = arrayListOf("Thadeu", "Jussara", "Maria")
+    private val myList = arrayListOf("Thadeu", "Jussara", "Maria")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,10 +17,13 @@ class MainActivity : AppCompatActivity() {
         // Example of a call to a native method
         homeTxt.text = stringFromJNI()
 
-
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
+            if(randomText.equals("Thadeu")){
+                homeImage.setImageResource(R.drawable.business_man)
+            }
+            homeTxt.text = randomText
             println("You Clickec in Me $randomText!")
         }
     }
