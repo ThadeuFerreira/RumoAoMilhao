@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
-            if(randomText.equals("Thadeu")){
+            if(randomText == "Thadeu"){
                 homeImage.setImageResource(R.drawable.business_man)
             }
             homeTxt.text = randomText
-            println("You Clickec in Me $randomText!")
+            println("You Clicked in Me $randomText!")
         }
     }
 
