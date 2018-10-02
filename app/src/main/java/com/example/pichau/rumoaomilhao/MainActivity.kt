@@ -1,5 +1,6 @@
 package com.example.pichau.rumoaomilhao
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,13 +8,21 @@ import android.support.annotation.DrawableRes
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import android.widget.TextView
-
+import com.example.pichau.rumoaomilhao.finance.PrivateCar
+import java.math.RoundingMode
+import java.text.DecimalFormat
+import java.time.Year
 
 
 class MainActivity : AppCompatActivity() {
 
     private val myList = arrayListOf("Thadeu", "Jussara", "Maria")
+    private val carList = arrayListOf("Fiat", "Volks Wagen", "Ford", "Nissan")
 
+    fun IntRange.random() =
+            Random().nextInt((endInclusive + 1) - start) +  start
+
+    @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,18 +32,24 @@ class MainActivity : AppCompatActivity() {
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
+            val carText = carList[choseNumber.nextInt(carList.count())]
             person.name = randomText
             if(randomText == "Thadeu"){
                 homeImage.setImageResource(R.drawable.business_man)
             }
-            profileNameTxt.text = randomText
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                totalBalanceTxt.text = choseNumber.doubles(100).toString()
-            }
-            else{
-                totalBalanceTxt.text = 13040.43.toString()
-            }
+            var car = PrivateCar(carText, choseNumber.nextInt(500))
+            car.maker = "fabricante"
+            car.year = Year.parse((1950..2020).random().toString())
+            car.model = "modelo"
+
+            person.liabilities.add(car)
+            profileNameTxt.text = person.name
+            val df = DecimalFormat("#.##")
+            df.roundingMode = RoundingMode.CEILING
+            totalBalanceTxt.text = df.format(choseNumber.nextDouble()*10000)
+
             println("You Clicked in Me $randomText!")
+            println("car = ${car}")
 
             val valueTV = TextView(this)
             valueTV.text = randomText

@@ -8,4 +8,5 @@ class PrivateCar(var name: String, id: Int) : Liability(name, id, "Car") {
     var model: String = ""
     var year: Year = Year.parse("1900")
 
+    override fun toString(): String = "name = $name\nmodel = $model\nyear = ${year}\nmaker = $maker"
 }
