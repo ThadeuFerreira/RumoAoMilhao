@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        var person = Person("",0,"")
+        var person = Person("",1,0,"")
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
