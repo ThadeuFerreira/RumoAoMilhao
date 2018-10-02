@@ -1,10 +1,14 @@
 package com.example.pichau.rumoaomilhao
 
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import android.widget.TextView
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,8 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Example of a call to a native method
-        homeTxt.text = stringFromJNI()
+
 
         homeBtn.setOnClickListener{
             val choseNumber = Random()
@@ -23,8 +26,18 @@ class MainActivity : AppCompatActivity() {
             if(randomText.equals("Thadeu")){
                 homeImage.setImageResource(R.drawable.business_man)
             }
-            homeTxt.text = randomText
+            profileNameTxt.text = randomText
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                totalBalanceTxt.text = choseNumber.doubles(100).toString()
+            }
+            else{
+                totalBalanceTxt.text = 13040.43.toString()
+            }
             println("You Clickec in Me $randomText!")
+            println("You Clickec in Me ${totalBalanceTxt.text}!")
+            val valueTV = TextView(this)
+            valueTV.text = randomText
+            investmentsLinearLayout.addView(valueTV)
         }
     }
 
