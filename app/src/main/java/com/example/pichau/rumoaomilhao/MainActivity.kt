@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
-            if(randomText.equals("Thadeu")){
+            if(randomText == "Thadeu"){
                 homeImage.setImageResource(R.drawable.business_man)
             }
             profileNameTxt.text = randomText
@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
             else{
                 totalBalanceTxt.text = 13040.43.toString()
             }
-            println("You Clickec in Me $randomText!")
-            println("You Clickec in Me ${totalBalanceTxt.text}!")
+            println("You Clicked in Me $randomText!")
+
             val valueTV = TextView(this)
             valueTV.text = randomText
             investmentsLinearLayout.addView(valueTV)
