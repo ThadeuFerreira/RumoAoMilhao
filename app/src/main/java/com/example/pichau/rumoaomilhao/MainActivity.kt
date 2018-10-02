@@ -19,10 +19,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-
+        var person = Person("",0,"")
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
+            person.name = randomText
             if(randomText == "Thadeu"){
                 homeImage.setImageResource(R.drawable.business_man)
             }
