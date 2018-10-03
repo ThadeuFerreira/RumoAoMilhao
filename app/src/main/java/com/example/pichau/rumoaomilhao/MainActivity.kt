@@ -36,9 +36,9 @@ class MainActivity : AppCompatActivity() {
 
         val myRef2 = database.getReference("/")
 
-        val key = myRef2.child("Liabilies").push().key
+        val key = myRef2.child("Liabilities").push().key
         if (key != null) {
-            myRef2.child("Liabilies").child(key).setValue(lib)
+            myRef2.child("Liabilities").child(key).setValue(lib)
             println("PASSOU POR AQUI!!")
         }
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        var person = Person("",1,0,"")
+        val person = Person("",1,0,"")
         homeBtn.setOnClickListener{
             val choseNumber = Random()
             val randomText = myList[choseNumber.nextInt(myList.count())]
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             if(randomText == "Thadeu"){
                 homeImage.setImageResource(R.drawable.business_man)
             }
-            var car = PrivateCar(carText, choseNumber.nextInt(500))
+            val car = PrivateCar(carText, choseNumber.nextInt(500))
             car.maker = "fabricante"
             car.year = Year.parse((1950..2020).random().toString())
             car.model = "modelo"
