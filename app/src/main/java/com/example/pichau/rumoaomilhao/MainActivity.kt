@@ -16,8 +16,7 @@ import java.text.DecimalFormat
 import java.time.Year
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-
-
+import java.time.LocalDateTime
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,9 +30,9 @@ class MainActivity : AppCompatActivity() {
     fun runFirebase( lib: Liability){
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("message")
+        val currentDateTime = LocalDateTime.now()
 
-        myRef.setValue("Hello Firebase World!")
-
+        myRef.setValue("Hello: Today is $currentDateTime")
         val myRef2 = database.getReference("/")
 
         val key = myRef2.child("Liabilities").push().key
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             myRef2.child("Liabilities").child(key).setValue(lib)
             println("PASSOU POR AQUI!!")
         }
-
+        println("PASSOU POR AQUI!!")
     }
     @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
