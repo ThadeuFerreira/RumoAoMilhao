@@ -8,10 +8,16 @@ import android.support.annotation.DrawableRes
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import android.widget.TextView
+import com.example.pichau.rumoaomilhao.finance.Asset
+import com.example.pichau.rumoaomilhao.finance.Liability
 import com.example.pichau.rumoaomilhao.finance.PrivateCar
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.time.Year
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +28,21 @@ class MainActivity : AppCompatActivity() {
     fun IntRange.random() =
             Random().nextInt((endInclusive + 1) - start) +  start
 
+    fun runFirebase( lib: Liability){
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("message")
+
+        myRef.setValue("Hello Firebase World!")
+
+        val myRef2 = database.getReference("/")
+
+        val key = myRef2.child("Liabilies").push().key
+        if (key != null) {
+            myRef2.child("Liabilies").child(key).setValue(lib)
+            println("PASSOU POR AQUI!!")
+        }
+
+    }
     @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             val valueTV = TextView(this)
             valueTV.text = randomText
             investmentsLinearLayout.addView(valueTV)
+            runFirebase(car)
         }
     }
 
