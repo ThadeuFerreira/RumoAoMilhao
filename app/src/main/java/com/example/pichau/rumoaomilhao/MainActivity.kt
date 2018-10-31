@@ -1,21 +1,18 @@
 package com.example.pichau.rumoaomilhao
 
 import android.annotation.SuppressLint
-import android.location.LocationProvider
-import android.os.Build
+import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.DrawableRes
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import android.widget.TextView
-import com.example.pichau.rumoaomilhao.finance.Asset
-import com.example.pichau.rumoaomilhao.finance.Liability
 import com.example.pichau.rumoaomilhao.finance.PrivateCar
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.time.Year
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.time.LocalDateTime
 
@@ -24,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private val myList = arrayListOf("Carlos", "Jussara", "Maria")
     private val carList = arrayListOf("Fiat", "Volks Wagen", "Ford", "Nissan")
-    private lateinit var fusedLocationClient: LocationProvider
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     fun IntRange.random() =
             Random().nextInt((endInclusive + 1) - start) +  start
@@ -41,6 +38,22 @@ class MainActivity : AppCompatActivity() {
         if (key != null) {
             myRef2.child(objType).child(key).setValue(obj)
         }
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation(): Location{
+        var latitude: Double? = 0.0
+        var longitude: Double? = 0.0
+        fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    latitude =  location?.latitude
+                    longitude = location?.longitude
+                }
+        val local = Location("provider")
+        local.latitude = latitude!!
+        local.longitude = longitude!!
+        return local
 
     }
     @SuppressLint("ObsoleteSdkInt")
@@ -77,6 +90,8 @@ class MainActivity : AppCompatActivity() {
             val valueTV = TextView(this)
             valueTV.text = randomText
             investmentsLinearLayout.addView(valueTV)
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+            person.location = getLocation()
             runFirebase(person)
         }
     }
