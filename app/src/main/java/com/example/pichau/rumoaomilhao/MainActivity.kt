@@ -70,15 +70,9 @@ class MainActivity : AppCompatActivity() {
             if(randomText == "Thadeu"){
                 homeImage.setImageResource(R.drawable.business_man)
             }
-            var car:PrivateCar
+            var car = PrivateCar()
             for(i in 0..3){
-                val carText = carList[choseNumber.nextInt(carList.count())]
-                car = PrivateCar(carText, choseNumber.nextInt(500))
-                car.maker = "fabricante - $i"
-                car.year = Year.parse((1950..2020).random().toString())
-                car.model = "modelo - $i"
-                person.liabilities.add(car)
-                runFirebase(car)
+                addCar(choseNumber, car, i, person)
             }
 
             profileNameTxt.text = person.name
@@ -94,6 +88,17 @@ class MainActivity : AppCompatActivity() {
             person.location = getLocation()
             runFirebase(person)
         }
+    }
+
+    private fun addCar(choseNumber: Random, car: PrivateCar?, i: Int, person: Person) {
+        var car1 = car
+        val carText = carList[choseNumber.nextInt(carList.count())]
+        car1 = PrivateCar(carText, choseNumber.nextInt(500))
+        car1.maker = "fabricante - $i"
+        car1.year = Year.parse((1950..2020).random().toString())
+        car1.model = "modelo - $i"
+        person.liabilities.add(car1)
+        runFirebase(car1)
     }
 
     /**
